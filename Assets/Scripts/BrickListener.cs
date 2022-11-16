@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class BrickListener : MonoBehaviour
 {
-    [SerializeField] Animator animator;
+    [SerializeField] private Animator animator;
+    [SerializeField] private GameObject player, coin;
     private bool isOn = true;
 
     private void Start()
@@ -20,6 +21,13 @@ public class BrickListener : MonoBehaviour
         {
             animator.SetBool("Off", true);
             isOn = false;
+
+            SpawnCoin();
         }
+    }
+
+    private void SpawnCoin()
+    {
+        Instantiate(coin, player.transform.position + new Vector3(0f, 5f, 0f), player.transform.rotation);
     }
 }
