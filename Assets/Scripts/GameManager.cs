@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -14,5 +12,15 @@ public class GameManager : MonoBehaviour
     public void Save()
     {
 
+    }
+
+    public void AddScore(int score)
+    {
+        storage.score += score;
+    }
+
+    public void RemoveScore(int score)
+    {
+        storage.score -= score;
     }
 }
