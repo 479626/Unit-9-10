@@ -24,7 +24,7 @@ public sealed class TimeManager : GameManager
         }
         else
         {
-            EndGame();
+            EndGame(false);
         }
     }
 

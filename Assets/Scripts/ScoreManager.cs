@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ScoreManager : GameManager
 {
-    [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] private TextMeshProUGUI hud, lost, win;
 
     private void Update()
     {
@@ -12,6 +12,8 @@ public class ScoreManager : GameManager
 
     private void Score()
     {
-        text.text = storage.score.ToString().PadLeft(5, '0');
+        hud.text = storage.score.ToString().PadLeft(5, '0');
+        lost.text = storage.score.ToString().PadLeft(5, '0');
+        win.text = storage.score.ToString().PadLeft(5, '0');
     }
 }

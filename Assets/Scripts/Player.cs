@@ -47,6 +47,10 @@ public class Player : MonoBehaviour
             jumpVelocity.y = 5f;
             animator.SetTrigger("Jump");
         }
+        else
+        {
+            return;
+        }
 
         rb.velocity = jumpVelocity;
     }
