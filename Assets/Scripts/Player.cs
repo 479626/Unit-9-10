@@ -45,25 +45,6 @@ public class Player : MonoBehaviour
         }
         #endregion
 
-        #region Gyroscopic Controls
-        // UNTESTED
-        velocity = new Vector2(Input.acceleration.x, Input.acceleration.y);
-        #endregion
-
-        #region Touch Controls
-        Touch touch = Input.GetTouch(0);
-        if (touch.tapCount == 1)
-        {
-            velocity.y = 3f;
-            animator.SetTrigger("Jump");
-        } 
-        else if (touch.tapCount == 2)
-        {
-            velocity.y = 6f;
-            animator.SetTrigger("Jump");
-        }
-        #endregion
-
         animator.SetFloat("Movement", velocity.x);
         rb.velocity = velocity;
     }

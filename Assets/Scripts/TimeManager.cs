@@ -5,10 +5,13 @@ public sealed class TimeManager : GameManager
     [Header("Time Restraint")]
     [SerializeField] private float timeLeft;
     [SerializeField] private TextMeshProUGUI timer;
+    [SerializeField] Animator timeAnimator;
+    bool flashing = false;
 
     private void Update()
     {
         Timer();
+        Flash();
     }
 
     private void Timer()
@@ -22,6 +25,18 @@ public sealed class TimeManager : GameManager
         else
         {
             EndGame();
+        }
+    }
+
+    private void Flash()
+    {
+        if (flashing)
+            return;
+
+        if (timeLeft < 6)
+        {
+            flashing = true;
+            timeAnimator.SetBool("On", true);
         }
     }
 }
