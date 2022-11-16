@@ -13,8 +13,15 @@ public sealed class TimeManager : GameManager
 
     private void Timer()
     {
-        timeLeft -= Time.deltaTime;
+        if (timeLeft > 0)
+        {
+            timeLeft -= Time.deltaTime;
 
-        timer.text = Mathf.RoundToInt(timeLeft).ToString().PadLeft(3, '0');
+            timer.text = Mathf.RoundToInt(timeLeft).ToString().PadLeft(3, '0');
+        }
+        else
+        {
+            EndGame();
+        }
     }
 }

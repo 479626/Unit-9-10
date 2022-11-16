@@ -8,9 +8,6 @@ public sealed class ScoreManager : GameManager
     private void Update()
     {
         Score();
-
-        if (Input.GetKeyDown(KeyCode.V))
-            AddScore(100);
     }
 
     private void Score()
