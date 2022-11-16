@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -18,35 +16,40 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        CheckForInput();
+        CheckForWalk();
+        CheckForJump();
     }
 
-    private void CheckForInput()
+    private void CheckForWalk()
     {
         Vector2 velocity = rb.velocity;
+        velocity.x = Input.acceleration.x * 6f;
 
-        #region PC Controls
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (velocity.x > 0)
         {
-            velocity.x = -3;
+            gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        }
+        else
+        {
             gameObject.transform.localRotation = Quaternion.Euler(0, 180, 0);
         }
 
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            velocity.x = 3;
-            gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        }
+        animator.SetFloat("Movement", velocity.x);
 
-        if (Input.GetKeyDown(KeyCode.Space) && PlayerIsGrounded())
+        rb.velocity = velocity;
+    }
+
+    private void CheckForJump()
+    {
+        Vector2 jumpVelocity = rb.velocity;
+
+        if (Input.GetTouch(0).tapCount == 1 && PlayerIsGrounded())
         {
-            velocity.y = 3f;
+            jumpVelocity.y = 5f;
             animator.SetTrigger("Jump");
         }
-        #endregion
 
-        animator.SetFloat("Movement", velocity.x);
-        rb.velocity = velocity;
+        rb.velocity = jumpVelocity;
     }
 
     private bool PlayerIsGrounded()
