@@ -34,9 +34,8 @@ public class Player : MonoBehaviour
             gameObject.transform.localRotation = Quaternion.Euler(0, 180, 0);
         }
 
-        animator.SetFloat("Movement", velocity.x);
-
         rb.velocity = velocity;
+        animator.SetFloat("Movement", velocity.sqrMagnitude);
     }
 
     private void CheckForJump()
