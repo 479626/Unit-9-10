@@ -25,26 +25,44 @@ public class Player : MonoBehaviour
     {
         Vector2 velocity = rb.velocity;
 
+        #region PC Controls
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             velocity.x = -3;
             gameObject.transform.localRotation = Quaternion.Euler(0, 180, 0);
-            print("Move attempt [" + velocity + "]");
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
             velocity.x = 3;
             gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
-            print("Move attempt [" + velocity + "]");
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && PlayerIsGrounded())
         {
             velocity.y = 3f;
             animator.SetTrigger("Jump");
-            print("Move attempt [" + velocity + "]");
         }
+        #endregion
+
+        #region Gyroscopic Controls
+        // UNTESTED
+        velocity = new Vector2(Input.acceleration.x, Input.acceleration.y);
+        #endregion
+
+        #region Touch Controls
+        Touch touch = Input.GetTouch(0);
+        if (touch.tapCount == 1)
+        {
+            velocity.y = 3f;
+            animator.SetTrigger("Jump");
+        } 
+        else if (touch.tapCount == 2)
+        {
+            velocity.y = 6f;
+            animator.SetTrigger("Jump");
+        }
+        #endregion
 
         animator.SetFloat("Movement", velocity.x);
         rb.velocity = velocity;
