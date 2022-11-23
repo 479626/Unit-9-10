@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetTouch(0).tapCount == 1 && PlayerIsGrounded())
         {
-            jumpVelocity.y = 5f;
+            jumpVelocity.y = 12f;
             animator.SetTrigger("Jump");
         }
         else
